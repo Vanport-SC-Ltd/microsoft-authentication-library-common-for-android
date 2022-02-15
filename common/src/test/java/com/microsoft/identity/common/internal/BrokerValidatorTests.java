@@ -74,12 +74,20 @@ public class BrokerValidatorTests {
     @Test
     public void testDebugBrokersInReleaseMode() {
         ReflectionHelpers.setStaticField(BuildConfig.class, "DEBUG", false);
+        ReflectionHelpers.setStaticField(BuildConfig.class, "SHOULD_TRUST_DEBUG_BROKERS", false);
         Assert.assertThrows("Cannot trust debug brokers in non-debug builds.", RuntimeException.class, new ThrowingRunnable() {
             @Override
             public void run() throws Throwable {
                 BrokerValidator.setShouldTrustDebugBrokers(true);
             }
         });
+    }
+
+    @Test
+    public void testShouldTrustDebugBrokersInReleaseMode() {
+        ReflectionHelpers.setStaticField(BuildConfig.class, "DEBUG", false);
+        ReflectionHelpers.setStaticField(BuildConfig.class, "SHOULD_TRUST_DEBUG_BROKERS", true);
+        Assert.assertTrue(BrokerValidator.getShouldTrustDebugBrokers());
     }
 
 }
