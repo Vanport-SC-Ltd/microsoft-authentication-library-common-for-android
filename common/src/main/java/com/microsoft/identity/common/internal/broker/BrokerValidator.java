@@ -59,10 +59,11 @@ public class BrokerValidator {
     private static boolean sShouldTrustDebugBrokers = BuildConfig.DEBUG;
 
     public static void setShouldTrustDebugBrokers(final boolean shouldTrustDebugBrokers) {
-        if (!BuildConfig.DEBUG && shouldTrustDebugBrokers) {
-            throw new RuntimeException("Cannot trust debug brokers in non-debug builds.");
+        if (BuildConfig.DEBUG || BuildConfig.SHOULD_TRUST_DEBUG_BROKERS) {
+            BrokerValidator.sShouldTrustDebugBrokers = shouldTrustDebugBrokers;
+            return;
         }
-        BrokerValidator.sShouldTrustDebugBrokers = shouldTrustDebugBrokers;
+        throw new RuntimeException("Cannot trust debug brokers in non-debug builds.");
     }
 
     public static boolean getShouldTrustDebugBrokers() {
