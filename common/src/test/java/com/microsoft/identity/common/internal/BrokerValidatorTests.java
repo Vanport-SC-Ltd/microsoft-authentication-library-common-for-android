@@ -49,6 +49,7 @@ public class BrokerValidatorTests {
     @Before
     public void setup() {
         mBrokerValidator = new BrokerValidator(ApplicationProvider.getApplicationContext());
+        ReflectionHelpers.setStaticField(BuildConfig.class, "DEBUG", true);
     }
 
     @Test
