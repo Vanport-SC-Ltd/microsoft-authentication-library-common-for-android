@@ -68,6 +68,7 @@ V.Next
 - [PATCH] Fix accidental code change that disabled PoP for auth code grant flow (#1661)
 - [PATCH] Synchronize updating refresh token in cache (saving new and removing old) to avoid race condition (#1659)
 - [PATCH] Throw RuntimeException when debug brokers are trusted in RELEASE mode (#1651)
+- [MINOR] Changes to support ROPC based E2E automation for linux (#1675)
 
 Version 3.6.3
 ----------
